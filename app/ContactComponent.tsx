@@ -34,12 +34,12 @@ export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false); // Add this line
   const { toast } = useToast();
 
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: string; value: any } }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setStatus("Sending...");
     setIsSubmitting(true); // Set submitting state to true
@@ -153,8 +153,8 @@ export function ContactForm() {
              group-hover/input:shadow-none transition duration-400
              `
             )}
-            rows="4"
-            cols="50"
+            rows={4}
+            cols={50}
             style={{ resize: "none" }}
           ></textarea>
         </LabelInputContainer>

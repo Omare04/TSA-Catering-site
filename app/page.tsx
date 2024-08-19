@@ -1,4 +1,5 @@
 "use client";
+import React, { FC } from "react";
 import Image from "next/image";
 import { Menu, MenuItem } from "./components/ui/navbar-menu";
 import { IconHome, IconMessage, IconUser } from "@tabler/icons-react";
@@ -35,6 +36,15 @@ import {
 import { Button } from "./shadcn-components/ui/button";
 import { useEffect, useCallback } from "react";
 
+interface NavbarProps {
+  className?: string;
+}
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
 const wordsText = `TSA-Catering proudly serves the majority of airports across Morocco, consistently delivering high-quality meals tailored to meet our customers' needs. Our unwavering commitment to these values ensures exceptional service 24/7, 365 days a year.`;
 
 export default function Home() {
@@ -45,7 +55,7 @@ export default function Home() {
   const [currentSection, setCurrentSection] = useState("section1");
 
   // Get the current section ID
-  const observer = useCallback((node) => {
+  const observer = useCallback((node: Element | null) => {
     if (node !== null) {
       const observerInstance = new IntersectionObserver(
         (entries) => {
@@ -67,8 +77,11 @@ export default function Home() {
   }, []);
 
   // Scroll to the section
-  const scrollToSnap = (id) => {
-    document.querySelector(id).scrollIntoView({ behavior: "smooth" });
+  const scrollToSnap = (id: string) => {
+    const element = document.querySelector(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -182,7 +195,7 @@ export default function Home() {
         <Button
           variant="outline"
           size="icon"
-          className="fixed bottom-4 right-6 bg-white bg-opacity-40 text-white rounded-full shadow-lg hover:bg-opacity-60 focus:outline-none focus:ring-2 focus:ring-gray-200 block md:hidden flex items-center justify-center"
+          className="fixed bottom-4 right-6 bg-white bg-opacity-40 text-white rounded-full shadow-lg hover:bg-opacity-60 focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden flex items-center justify-center"
           onClick={() => setIsModalOpen(true)}
         >
           <svg
@@ -207,7 +220,7 @@ export default function Home() {
   );
 }
 
-function Navbar({ className }) {
+const Navbar: FC<NavbarProps> = ({ className }) => {
   const [active, setActive] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -255,9 +268,9 @@ function Navbar({ className }) {
       <Modal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
-}
+};
 
-const Modal = ({ isOpen, onClose }) => {
+const Modal: FC<ModalProps> = ({ isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="md:w-full">
@@ -436,7 +449,7 @@ const ArrowIcon = () => (
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-up"
+    // class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-up"
     className="w-6 h-6 "
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -457,7 +470,7 @@ const StoreIcon = () => (
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="icon icon-tabler icons-tabler-outline icon-tabler-building-store"
+    // class="icon icon-tabler icons-tabler-outline icon-tabler-building-store"
     className="mt-0.5"
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -480,7 +493,7 @@ const MailIcon = () => (
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
-    class="icon icon-tabler icons-tabler-outline icon-tabler-mail"
+    // class="icon icon-tabler icons-tabler-outline icon-tabler-mail"
     className="mt-1"
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />

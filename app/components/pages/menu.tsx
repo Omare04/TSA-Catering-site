@@ -10,12 +10,8 @@ import {
 } from "../ui/carousel";
 import { Card } from "../ui/card-carousel";
 import { SocialIcon } from "react-social-icons";
-import { GlareCard } from "../ui/glare-card";
 
 export function MenuSection() {
-  const cards = data.map((card, index) => (
-    <Card key={card.src} card={card} index={index} layout={true} />
-  ));
 
   // Make a contact button for smaller screen and do the menu section
 
@@ -167,7 +163,7 @@ const SocialIcons = () => {
 const carouselData = [
   {
     category: "1",
-    // title: "You can do more with AI.",
+
     src: "/images/menu-catalogue/menu2.jpeg",
   },
   {

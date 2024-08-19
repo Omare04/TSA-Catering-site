@@ -39,7 +39,10 @@ export const MenuItem = ({
   children?: React.ReactNode;
 }) => {
   const scrollToSnap = (id: string) => {
-    document.querySelector(id).scrollIntoView({ behavior: "smooth" });
+    const element = document.querySelector(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -69,7 +72,6 @@ export const MenuItem = ({
     </div>
   );
 };
-
 
 export const Menu = ({
   setActive,
@@ -117,5 +119,3 @@ export const ProductItem = ({
     </Link>
   );
 };
-
-

@@ -18,9 +18,7 @@ import { useOutsideClick } from "@/hooks/use-outside-click";
 
 type Card = {
   src: string;
-  title: string;
   category: string;
-  content: React.ReactNode;
 };
 
 export const Card = ({
@@ -35,7 +33,7 @@ export const Card = ({
   return (
     <>
       <motion.button
-        layoutId={layout ? `card-${card.title}` : undefined}
+        layoutId={layout ? `card-${card.category}` : undefined}
         className="rounded-3xl bg-gray-100 dark:bg-neutral-900 h-[42rem] w-full   overflow-hidden flex flex-col items-start justify-start relative z-10"
       >
         <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-black/50 via-transparent to-transparent z-30" />
@@ -49,7 +47,7 @@ export const Card = ({
         </div>
         <BlurImage
           src={card.src}
-          alt={card.title}
+          alt={card.category}
           fill
           className="object-cover absolute z-10 inset-0"
         />
