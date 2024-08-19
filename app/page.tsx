@@ -238,7 +238,7 @@ const Navbar: FC<NavbarProps> = ({ className }) => {
           <MenuItem
             setActive={setActive}
             active={active}
-            item="Company"
+            item="Overview"
             section="section2"
             icon={<CompanyIcon />}
           />
