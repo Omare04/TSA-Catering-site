@@ -23,6 +23,10 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        "custom-med-screen": '1200px',
+        "phone-screen": '300px'
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

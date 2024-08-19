@@ -4,7 +4,6 @@ import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
-
 export function ExpandableCard() {
   const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
     null
@@ -12,12 +11,11 @@ export function ExpandableCard() {
   const id = useId();
   const ref = useRef<HTMLDivElement>(null);
 
-
   useOutsideClick(ref, () => setActive(null));
 
   return (
     <>
-      <ul className="mx-auto w-full grid grid-cols-3 md:grid-cols-3 grid-rows-2 items-start gap-4 ">
+      <ul className="mx-auto w-full grid grid-cols-3 phone-screen:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-2 items-start gap-4 ">
         {cards.map((card, index) => (
           <motion.div
             layoutId={`card-${card.title}-${id}`}

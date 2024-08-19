@@ -17,142 +17,141 @@ export function MenuSection() {
     <Card key={card.src} card={card} index={index} layout={true} />
   ));
 
+  // Make a contact button for smaller screen and do the menu section
+
   return (
-    <div className="w-full h-full flex gap-10 py-3">
-      <div className="w-1/3">
-        <div className="text-3xl font-normal text-neutral-600 dark:text-neutral-400 pb-3">
-          {/* <h1>Menu Catalogue</h1> */}
-        </div>
-        <Carousel>
-          <CarouselContent className="h-full">
-            {carouselData.map((card, index) => (
-              <CarouselItem key={index}>
-                <Card key={card.src} card={card} index={index} layout={true} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-      </div>
-
-      <div className="text-base font-normal text-neutral-600 dark:text-neutral-400 w-full pl-7">
-        {/* <h2 className="text-3xl pb-3 pt-2">Menu Overview</h2>
-        <p className="text-xl">
-          AT TSA Catering every dish is a celebration of taste and creativity.
-          Our menu is designed to delight your palate with a diverse selection
-          of flavorful and customizable dishes, perfect for any occasion.
-        </p> */}
-
-        <div className="flex gap-5 pt-10 justify-start">
-          <div className="flex gap-5 ">
-            <div className="flex flex-col gap-9">
-              <div>
-                <h2 className="text-2xl font-bold">Appetizers</h2>
-                <p>
-                  Start with our delicious canapés and fresh salads, perfect for
-                  any palate.
-                </p>
-                <ul>
-                  <li>
-                    <strong>Gourmet Canapés:</strong> Bite-sized treats with
-                    smoked salmon, brie, and more.
-                  </li>
-                  <li>
-                    <strong>Fresh Salads:</strong> Crisp salads with a variety
-                    of toppings and dressings.
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold">Main Courses</h2>
-                <p>Satisfy your guests with our diverse main course options.</p>
-                <ul>
-                  <li>
-                    <strong>Succulent Meats:</strong> Slow-roasted beef,
-                    herb-crusted lamb, and juicy chicken.
-                  </li>
-                  <li>
-                    <strong>Seafood Delights:</strong> Grilled salmon, shrimp
-                    scampi, and seared scallops.
-                  </li>
-                  <li>
-                    <strong>Vegetarian & Vegan:</strong> Hearty vegetable
-                    lasagna, stuffed peppers, and more.
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold">Breakfast</h2>
-                <p>Start your day with our delightful breakfast options.</p>
-                <ul>
-                  <li>
-                    <strong>Hearty Omelettes:</strong> Made-to-order omelettes
-                    with your choice of fillings.
-                  </li>
-                  <li>
-                    <strong>Freshly Baked Pastries:</strong> Croissants,
-                    muffins, and other baked goods.
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="flex flex-col gap-9">
-              <div>
-                <h2 className="text-2xl font-bold">Salads</h2>
-                <p>Enjoy our selection of fresh and flavorful salads.</p>
-                <ul>
-                  <li>
-                    <strong>Greek Salad:</strong> Crisp vegetables, feta cheese,
-                    and olives.
-                  </li>
-                  <li>
-                    <strong>Caesar Salad:</strong> Romaine lettuce, croutons,
-                    and Caesar dressing.
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold">Drinks</h2>
-                <p>Quench your thirst with our refreshing drink options.</p>
-                <ul>
-                  <li>
-                    <strong>Fresh Juices:</strong> Orange, apple, and other
-                    seasonal juices.
-                  </li>
-                  <li>
-                    <strong>Specialty Coffees:</strong> Espresso, cappuccino,
-                    and lattes.
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold">Desserts</h2>
-                <p>Finish with our mouth-watering desserts.</p>
-                <ul>
-                  <li>
-                    <strong>Decadent Cakes:</strong> Available in chocolate,
-                    vanilla, red velvet, and more.
-                  </li>
-                  <li>
-                    <strong>Gourmet Pastries:</strong> Macarons, éclairs, tarts,
-                    and other sweet treats.
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex gap-3"></div>
-      </div>
+    <div className="w-full flex phone-screen:flex-col md:flex-row gap-10 py-3 h-full">
+      <MenuCarousel />
+      <MenuText />
     </div>
   );
 }
+
+const MenuCarousel = () => {
+  return (
+    <div className="md:w-1/3 phone-screen:w-full">
+      <Carousel>
+        <CarouselContent className="">
+          {carouselData.map((card, index) => (
+            <CarouselItem key={index}>
+              <Card key={card.src} card={card} index={index} layout={true} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious className="hidden md:block" />
+        <CarouselNext className="hidden md:block" />
+      </Carousel>
+    </div>
+  );
+};
+
+const MenuText = () => {
+  return (
+    <div className="flex gap-5 pt-10 justify-start text-base font-normal text-neutral-600 dark:text-neutral-400 w-full pl-7 h-full flex-wrap">
+      <div className="flex gap-5 ">
+        <div className="flex flex-col gap-9">
+          <div>
+            <h2 className="text-2xl font-bold">Appetizers</h2>
+            <p>
+              Start with our delicious canapés and fresh salads, perfect for any
+              palate.
+            </p>
+            <ul>
+              <li>
+                <strong>Gourmet Canapés:</strong> Bite-sized treats with smoked
+                salmon, brie, and more.
+              </li>
+              <li>
+                <strong>Fresh Salads:</strong> Crisp salads with a variety of
+                toppings and dressings.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold">Main Courses</h2>
+            <p>Satisfy your guests with our diverse main course options.</p>
+            <ul>
+              <li>
+                <strong>Succulent Meats:</strong> Slow-roasted beef,
+                herb-crusted lamb, and juicy chicken.
+              </li>
+              <li>
+                <strong>Seafood Delights:</strong> Grilled salmon, shrimp
+                scampi, and seared scallops.
+              </li>
+              <li>
+                <strong>Vegetarian & Vegan:</strong> Hearty vegetable lasagna,
+                stuffed peppers, and more.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold">Breakfast</h2>
+            <p>Start your day with our delightful breakfast options.</p>
+            <ul>
+              <li>
+                <strong>Hearty Omelettes:</strong> Made-to-order omelettes with
+                your choice of fillings.
+              </li>
+              <li>
+                <strong>Freshly Baked Pastries:</strong> Croissants, muffins,
+                and other baked goods.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-col gap-9">
+          <div>
+            <h2 className="text-2xl font-bold">Salads</h2>
+            <p>Enjoy our selection of fresh and flavorful salads.</p>
+            <ul>
+              <li>
+                <strong>Greek Salad:</strong> Crisp vegetables, feta cheese, and
+                olives.
+              </li>
+              <li>
+                <strong>Caesar Salad:</strong> Romaine lettuce, croutons, and
+                Caesar dressing.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold">Drinks</h2>
+            <p>Quench your thirst with our refreshing drink options.</p>
+            <ul>
+              <li>
+                <strong>Fresh Juices:</strong> Orange, apple, and other seasonal
+                juices.
+              </li>
+              <li>
+                <strong>Specialty Coffees:</strong> Espresso, cappuccino, and
+                lattes.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold">Desserts</h2>
+            <p>Finish with our mouth-watering desserts.</p>
+            <ul>
+              <li>
+                <strong>Decadent Cakes:</strong> Available in chocolate,
+                vanilla, red velvet, and more.
+              </li>
+              <li>
+                <strong>Gourmet Pastries:</strong> Macarons, éclairs, tarts, and
+                other sweet treats.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const SocialIcons = () => {
   return (

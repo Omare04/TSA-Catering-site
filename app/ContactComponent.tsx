@@ -88,14 +88,14 @@ export function ContactForm() {
   };
 
   return (
-    <div className="max-w-4xl h-full w-full mx-auto rounded-none md:rounded-2xl  border-stone-400 border-opacity-30 p-5 shadow-input bg-gray-200 bg-opacity-50 dark:bg-black border">
+    <div className="max-w-4xl h-auto w-full mx-auto rounded-none md:rounded-2xl  border-stone-400 border-opacity-30 p-5 shadow-input bg-gray-200 bg-opacity-50 dark:bg-black border ">
       <Toaster />
       <h2 className="font-bold text-2xl text-neutral-800 dark:text-neutral-200">
         Contact Us
       </h2>
 
-      <form className="h-full pt-3" onSubmit={handleSubmit}>
-        <div className="h-full flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
+      <form className="h-auto pt-3" onSubmit={handleSubmit}>
+        <div className="h-auto flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
           <LabelInputContainer>
             <Label htmlFor="firstName">First name</Label>
             <Input

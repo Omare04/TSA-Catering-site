@@ -36,7 +36,7 @@ export const ParallaxScroll = ({
       ref={gridRef}
     >
       <div
-        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 items-start max-w-full mx-auto gap-10 py-0 px-5"
+        className="grid grid-cols-2 phone-screen:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start max-w-full mx-auto gap-10 py-0 px-5"
         ref={gridRef}
       >
         <div className="grid gap-10">

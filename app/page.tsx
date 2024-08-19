@@ -38,14 +38,11 @@ import { useEffect, useCallback } from "react";
 const wordsText = `TSA-Catering proudly serves the majority of airports across Morocco, consistently delivering high-quality meals tailored to meet our customers' needs. Our unwavering commitment to these values ensures exceptional service 24/7, 365 days a year.`;
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const closeModal = () => setIsModalOpen(false);
+
   const words = ["Exclusive", "Premium", "High-end", "High-quality"];
   const [currentSection, setCurrentSection] = useState("section1");
-
-  // Scroll handler function
-  const handleScroll = () => {
-    const sectionId = getCurrentSectionId();
-    setCurrentSection(sectionId);
-  };
 
   // Get the current section ID
   const observer = useCallback((node) => {
@@ -77,8 +74,8 @@ export default function Home() {
   return (
     <>
       <BackgroundBeams />
-      <main className="h-screen snap-y overflow-y-scroll scroll-smooth">
-        <div className="h-full w-full snap-y snap-mandatory px-10">
+      <main className="h-screen snap-y overflow-y-scroll scroll-smooth 2xl:w-[50%] mx-auto">
+        <div className="h-full w-full snap-y snap-mandatory px-10 max-w-1/2">
           <motion.div
             initial={{ opacity: 0.0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -87,13 +84,12 @@ export default function Home() {
               duration: 0.8,
               ease: "easeInOut",
             }}
-            className="snap-center"
+            className="snap-center h-auto"
             id="section1"
             ref={observer}
           >
-            <Navbar className="top-2" />
+            <Navbar className="top-2 hidden md:block" />
             {/* LOGO */}
-            <div className="top-0 right-0 mt-4 mr-4"></div>
             <div className="w-full ml-2 pt-2 flex justify-between">
               <img
                 src="images/tsa-logo-removebg-preview.png"
@@ -107,14 +103,14 @@ export default function Home() {
             {/* Socials */}
             {/* Socials */}
             {/* Main Content Container */}
-            <div className="max-h-screen pt-1 max-w-screen">
+            <div className="max-h-screen pt-1 max-w-screen h-auto">
               {/* TEXT */}
               <div className="text-4xl font-normal text-neutral-600 dark:text-neutral-400 flex w-full"></div>
 
               {/* Content Container */}
-              <div className="h-full flex justify-center gap-10 pt-6 ">
+              <div className="flex justify-center gap-10 pt-6 h-auto">
                 {/* Left Container*/}
-                <div className="h-full w-300 z-40 mt-3 ml-2 flex justify-center flex-col">
+                <div className="h-auto w-300 z-40 mt-3 ml-2 flex justify-center flex-col">
                   <div className="flex w-full ml-1">
                     <div className="text-4xl font-normal text-neutral-600 dark:text-neutral-400 flex w-full pb-4">
                       <span>
@@ -134,7 +130,7 @@ export default function Home() {
                       words={wordsText}
                     />
                   </p>
-                  <div className="h-full w-full pt-6">
+                  <div className="h-auto w-full pt-6 flex-1 hidden md:block">
                     <ContactForm />
                   </div>
                 </div>
@@ -142,28 +138,31 @@ export default function Home() {
                   direction="right"
                   speed="slow"
                   pauseOnHover={false}
+                  className="hidden custom-med-screen:block h-auto"
                 />
               </div>
             </div>
           </motion.div>
-          {/* Gallery Section */}
+          {/* Gallery Of Menu Section */}
           <div
-            className=" snap-center flex w-full py-7"
+            className="snap-center flex w-full py-7 h-auto flex-1"
             id="section2"
             ref={observer}
           >
             <ExpandableCard />
           </div>
 
+          {/* Menu Section */}
           <div
-            className="snap-center  h-full w-full pt-7 pl-10"
+            className="snap-center w-full h-auto pt-7 pl-10"
             id="section3"
             ref={observer}
           >
             <MenuSection />
           </div>
+          {/* Gallery Section */}
           <div
-            className="snap-center  h-full w-full pt-7 pl-6"
+            className="snap-center w-full h-full pt-7 pl-6 pb-5"
             id="section4"
             ref={observer}
           >
@@ -174,13 +173,36 @@ export default function Home() {
           <Button
             variant="outline"
             size="icon"
-            className="fixed bottom-4 right-6 bg-white bg-opacity-40 text-white rounded-full shadow-lg hover:bg-opacity-60 focus:outline-none focus:ring-2 focus:ring-gray-200"
+            className="fixed bottom-4 right-6 bg-white bg-opacity-40 text-white rounded-full shadow-lg hover:bg-opacity-60 focus:outline-none focus:ring-2 focus:ring-gray-200 hidden md:flex items-center justify-center"
             onClick={() => scrollToSnap(`#section1`)}
           >
             <ArrowIcon />
           </Button>
         )}
+        <Button
+          variant="outline"
+          size="icon"
+          className="fixed bottom-4 right-6 bg-white bg-opacity-40 text-white rounded-full shadow-lg hover:bg-opacity-60 focus:outline-none focus:ring-2 focus:ring-gray-200 block md:hidden flex items-center justify-center"
+          onClick={() => setIsModalOpen(true)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="black"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="p-0.5 mx-auto"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+          </svg>
+        </Button>
       </main>
+      <Modal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
 }
@@ -238,11 +260,11 @@ function Navbar({ className }) {
 const Modal = ({ isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-full">
+      <DialogContent className="md:w-full">
         <DialogHeader className="w-full">
           <DialogTitle className="text-2xl pl-1">Contact</DialogTitle>
         </DialogHeader>
-        <DialogDescription className="text-lg flex  gap-10 w-full justify-start pt-2">
+        <DialogDescription className="text-lg flex gap-10 w-full justify-start pt-2">
           {/* Phone */}
           <div className="w=1/2 ">
             <div>
@@ -415,6 +437,7 @@ const ArrowIcon = () => (
     stroke-linecap="round"
     stroke-linejoin="round"
     class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-up"
+    className="w-6 h-6 "
   >
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
     <path d="M12 5l0 14" />
